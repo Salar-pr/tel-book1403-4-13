@@ -1,0 +1,44 @@
+def seve():
+    f = open('git/contacts.txt','w')
+    f.write(str(contacts))
+    f.close()
+
+
+def loud():
+    try:
+        f = open('git/contacts.txt','r')
+        contacts = f.read()
+        f.close()
+    except FileNotFoundError:
+        return {}
+    contacts = contacts.replace('{','')
+    contacts = contacts.replace('}','')
+    contacts = contacts.replace('\'','')
+    contacts = contacts.split(',')
+    for item in contacts:
+        print(item.strip())
+    
+
+contacts = loud()
+
+
+
+
+while True:
+
+    name = input("enter name :")
+
+    if name in contacts:
+        print(contacts[name])
+    else:
+        answer = input("this contact is not in your contact list \n do you wont to add him?: (yes/no)").lower()
+        while answer not in ['yes','no']:
+            answer = input("this contact is not in your contact list \n do you wont to add him?: (yes/no)").lower()
+
+        if answer in ['yes']:
+            number = input('enter him number:')
+            contacts[name]=number
+    if name in 'end' and answer in 'no':
+        break
+    
+seve()
